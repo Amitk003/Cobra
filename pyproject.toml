@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cobra"
+version = "0.1.0"
+description = "The Cobra programming language and ecosystem"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Amitk003"}
+]
+
+[project.scripts]
+cobrac = "cobra.cli.cobrac:main"
+cobra = "cobra.cli.cobra:main"
+cobrapkg = "cobra.cli.cobrapkg:main"
+
+[tool.setuptools.packages.find]
+include = ["cobra*"]

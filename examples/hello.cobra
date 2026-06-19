@@ -1,0 +1,8 @@
+print("Hello, World!")
+
+let name = "Cobra"
+print("Hello " + name)
+
+let x = 10
+let y = 20
+print("x + y = " + str(x + y))
