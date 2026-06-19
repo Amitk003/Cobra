@@ -1,0 +1,21 @@
+# CobraOS — neofetch
+import os
+
+let bold = "\033[1m"
+let reset = "\033[0m"
+let blue = "\033[34m"
+let green = "\033[32m"
+let cyan = "\033[36m"
+
+print(bold + cyan + "       ___________________________" + reset)
+print(bold + cyan + "      |                           |" + reset)
+print(bold + cyan + "      |  " + green + "CobraOS" + cyan + "                    |" + reset)
+print(bold + cyan + "      |___________________________|" + reset)
+print(bold + cyan + "      |                           |" + reset)
+print(bold + cyan + "      |" + reset + "  OS: CobraOS v0.1.0" + "           " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |" + reset + "  Host: " + os.hostname() + "           " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |" + reset + "  Kernel: " + os.name() + "             " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |" + reset + "  User: " + os.user() + "              " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |" + reset + "  Shell: Cobra v0.1.0" + "         " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |" + reset + "  CPU Cores: " + str(os.cpu_count()) + "             " + bold + cyan + "|" + reset)
+print(bold + cyan + "      |___________________________|" + reset)

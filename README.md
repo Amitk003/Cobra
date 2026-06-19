@@ -41,7 +41,7 @@ cobrac examples/json_demo.cobra   # JSON module demo
 | Package Manager | cobrapkg init, install, uninstall, list | ✅ Done (Phase 5) |
 | Cobra Shell | `cobra` REPL and `cobra file.cobra` runner | ✅ Done (Phase 6) |
 | C Codegen | `cobrac -t c file.cobra -o file.c` | ✅ Done (Phase 7) |
-| CobraOS | Linux-based OS image with Cobra tooling | 📋 Planned |
+| CobraOS | Deployment scripts, neofetch, init, ssh tunnel | ✅ Done (Phase 8) |
 
 ## License
 

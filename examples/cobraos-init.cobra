@@ -1,0 +1,25 @@
+# CobraOS — Boot init script
+# Runs automatically on login
+
+import os
+import filesystem
+import datetime
+
+let login_time = datetime.now()
+let user = os.user()
+let host = os.hostname()
+
+print("")
+print("  ╔══════════════════════════════════════╗")
+print("  ║        CobraOS v0.1.0               ║")
+print("  ║  Building the future, one layer     ║")
+print("  ║  at a time.                         ║")
+print("  ╚══════════════════════════════════════╝")
+print("")
+print("  Welcome, " + user + "!")
+print("  Login time: " + login_time)
+print("  Hostname: " + host)
+print("  Type 'cobra' to enter the Cobra Shell")
+print("  Type 'cobrac --help' for compiler help")
+print("  Type 'cobrapkg --help' for package manager")
+print("")

@@ -17,6 +17,7 @@ authors = [
 cobrac = "cobra.cli.cobrac:main"
 cobra = "cobra.cli.cobra:main"
 cobrapkg = "cobra.cli.cobrapkg:main"
+cobraos = "cobra.cli.cobraos:main"
 
 [tool.setuptools.packages.find]
 include = ["cobra*"]
