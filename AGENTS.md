@@ -35,6 +35,10 @@ cobra/
 - Single and double-quoted strings are both supported in the lexer
 - Runtime builtins are imported via `from cobra.runtime.builtins import *` when needed
 - Standard library modules are in `cobra/stdlib/` and imported as `import cobra.stdlib.<name> as <name>`
+- C codegen in `codegen_c.py` uses type tracking via `_is_number_node()` to determine string vs numeric
+- C codegen generates a complete C file with embedded runtime helpers (str concat, double-to-str)
+- `cobrac --target c` flag switches between Python and C codegen
+- Adding `*.c` and `*.exe` to .gitignore keeps generated files out of version control
 
 ## Next Phase Tasks
 

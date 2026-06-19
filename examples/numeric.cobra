@@ -1,0 +1,19 @@
+# Pure numeric — no strings
+let x = 10
+let y = 20
+let z = x + y
+if x > 5 {
+    print("x is big")
+}
+let count = 0
+while count < 3 {
+    print("loop")
+    count = count + 1
+}
+for i in 0..3 {
+    print("for")
+}
+func add(a, b) {
+    return a + b
+}
+print(add(5, 7))
