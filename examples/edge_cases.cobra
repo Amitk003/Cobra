@@ -1,0 +1,55 @@
+# Edge cases and advanced features
+
+# Nested if-else
+let score = 85
+if score >= 90 {
+    print("A")
+} else {
+    if score >= 80 {
+        print("B")
+    } else {
+        print("C")
+    }
+}
+
+# Nested loops
+for i in 0..3 {
+    for j in 0..2 {
+        print("(" + str(i) + "," + str(j) + ")")
+    }
+}
+
+# Complex boolean expressions
+let a = true
+let b = false
+if a and not b {
+    print("logic works")
+}
+
+# Precedence: arithmetic
+let result = 2 + 3 * 4 - 6 / 2
+print("2 + 3 * 4 - 6 / 2 = " + str(result))
+
+# Recursive function
+func fib(n) {
+    if n <= 1 {
+        return n
+    }
+    return fib(n - 1) + fib(n - 2)
+}
+print("fib(10) = " + str(fib(10)))
+
+# Multiple parameters
+func multiply(a, b, c) {
+    return a * b * c
+}
+print("multiply(2, 3, 4) = " + str(multiply(2, 3, 4)))
+
+# Variable shadowing (let inside block)
+let x = 1
+print("outer x = " + str(x))
+if true {
+    let x = 2
+    print("inner x = " + str(x))
+}
+print("outer x again = " + str(x))

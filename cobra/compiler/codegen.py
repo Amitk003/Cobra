@@ -20,11 +20,16 @@ class CodegenPy:
     def generate(self, node: ast.Node) -> str:
         self.output = []
         self._stdlib_imports = set()
+        self._uses_runtime = False
         self._visit(node)
-        header = ""
+        header_lines = []
+        if self._uses_runtime:
+            header_lines.append("from cobra.runtime.builtins import *")
         if self._stdlib_imports:
-            imports = "\n".join(sorted(self._stdlib_imports))
-            header = imports + "\n\n"
+            header_lines.extend(sorted(self._stdlib_imports))
+        header = ""
+        if header_lines:
+            header = "\n".join(header_lines) + "\n\n"
         return header + "\n".join(self.output)
 
     def _visit(self, node: ast.Node):
@@ -92,11 +97,24 @@ class CodegenPy:
         val = self._visit(node.children[0])
         self.emit(f"return {val}")
 
+    _RUNTIME_FUNCS = {
+        "print": "cobra_print",
+        "input": "cobra_input",
+        "str": "cobra_str",
+        "int": "cobra_int",
+        "bool": "cobra_bool",
+        "float": "cobra_float",
+        "len": "cobra_len",
+        "type": "cobra_type",
+        "range": "cobra_range",
+    }
+
     def _visit_call(self, node: ast.Node):
         name = node.value
         args = ", ".join(self._visit(child) for child in node.children)
-        if name == "print":
-            return f"print({args})"
+        if name in self._RUNTIME_FUNCS:
+            self._uses_runtime = True
+            return f"{self._RUNTIME_FUNCS[name]}({args})"
         return f"{name}({args})"
 
     def _visit_import(self, node: ast.Node):
@@ -105,7 +123,9 @@ class CodegenPy:
 
     def _visit_block(self, node: ast.Node):
         for child in node.children:
-            self._visit(child)
+            result = self._visit(child)
+            if result is not None:
+                self.emit(f"{result}")
 
     def _visit_binary_op(self, node: ast.Node):
         left = self._visit(node.children[0])

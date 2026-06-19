@@ -64,8 +64,20 @@ class Parser:
             self.advance()
             return self.parse_stmt()
 
+        if tok.type == "IDENTIFIER" and self._peek_next().type == "EQ":
+            name = self.advance().value
+            self.expect("EQ")
+            val = self.parse_expr()
+            return ast.assign(name, val)
+
         expr = self.parse_expr()
         return expr
+
+    def _peek_next(self) -> Token:
+        idx = self.pos + 1
+        if idx < len(self.tokens):
+            return self.tokens[idx]
+        return self.tokens[-1]
 
     def parse_let(self) -> ast.Node:
         self.expect("LET")
