@@ -1,7 +1,6 @@
 import re
 from dataclasses import dataclass
 
-
 TOKEN_SPEC = [
     ("NUMBER",    r"\d+(\.\d+)?"),
     ("STRING",    r'"[^"]*"'),

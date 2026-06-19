@@ -30,7 +30,7 @@ class NodeType(Enum):
 @dataclass
 class Node:
     type: NodeType
-    value: Optional[object] = None
+    value: object | None = None
     children: list["Node"] | None = None
     op: str | None = None
 

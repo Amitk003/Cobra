@@ -11,7 +11,6 @@ RUNTIME_HEADER = """\
 #include <string.h>
 #include <math.h>
 
-/* Cobra Runtime for C codegen */
 static char* cobra_str_concat(const char* a, const char* b) {
     size_t len = strlen(a) + strlen(b) + 1;
     char* result = (char*)malloc(len);
@@ -34,12 +33,10 @@ static char* cobra_bool_to_str(int x) {
 }
 """
 
-
 STRING_FUNCS = {"str", "input", "cobra_str_from_double", "cobra_str_concat", "cobra_bool_to_str"}
 
 
 def _is_number_node(node: ast.Node) -> bool:
-    """Check if a node produces a numeric value (not a string)."""
     t = node.type
     if t in (ast.NodeType.INT, ast.NodeType.FLOAT):
         return True
@@ -197,9 +194,7 @@ class CodegenC:
     def _visit_binary_op(self, node: ast.Node):
         left = self._visit(node.children[0])
         right = self._visit(node.children[1])
-
         is_num = _is_number_node(node.children[0]) and _is_number_node(node.children[1])
-
         if node.op == "+":
             if is_num:
                 return f"({left} + {right})"
@@ -208,7 +203,6 @@ class CodegenC:
             if _is_number_node(node.children[1]):
                 right = f"cobra_double_to_str({right})"
             return f"cobra_str_concat({left}, {right})"
-
         op_map = {
             "-": " - ", "*": " * ", "/": " / ",
             "==": " == ", "!=": " != ", "<": " < ", ">": " > ",

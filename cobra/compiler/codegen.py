@@ -10,6 +10,8 @@ class CodegenPy:
         self.indent_level = 0
         self.output = []
         self._stdlib_imports = set()
+        self._uses_runtime = False
+        self._uses_packages = False
 
     def indent(self):
         return "    " * self.indent_level

@@ -15,7 +15,8 @@ cobra/
 ├── runtime/      # Built-in functions
 ├── stdlib/       # Standard library modules
 ├── cli/          # cobrac, cobra, cobrapkg entry points
-└── pkgmgr/       # Package manager
+├── pkgmgr/       # Package manager
+└── os/           # CobraOS deployment utilities
 ```
 
 ## Git Workflow
