@@ -39,7 +39,7 @@ cobrac examples/json_demo.cobra   # JSON module demo
 | Cobra Runtime | built-in functions (print, input, str, int, len, etc.) | ✅ Done (Phase 3) |
 | Standard Library | math, string, json, filesystem, datetime, os | ✅ Done (Phase 4) |
 | Package Manager | cobrapkg init, install, uninstall, list | ✅ Done (Phase 5) |
-| Cobra Shell | Interactive REPL and script runner | 📋 Planned |
+| Cobra Shell | `cobra` REPL and `cobra file.cobra` runner | ✅ Done (Phase 6) |
 | CobraOS | Linux-based OS image with Cobra tooling | 📋 Planned |
 
 ## License
