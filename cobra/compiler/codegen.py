@@ -21,10 +21,16 @@ class CodegenPy:
         self.output = []
         self._stdlib_imports = set()
         self._uses_runtime = False
+        self._uses_packages = False
         self._visit(node)
         header_lines = []
         if self._uses_runtime:
             header_lines.append("from cobra.runtime.builtins import *")
+        if self._uses_packages:
+            header_lines.append(
+                "import sys, os as _os; _p = _os.path.expanduser('~/.cobra/packages'); "
+                "if _os.path.isdir(_p) and _p not in sys.path: sys.path.insert(0, _p)"
+            )
         if self._stdlib_imports:
             header_lines.extend(sorted(self._stdlib_imports))
         header = ""
@@ -121,14 +127,19 @@ class CodegenPy:
         obj = self._visit(node.children[0])
         return f"{obj}.{node.value}"
 
+    _STDLIB_MODULES = {"math", "string", "json", "filesystem", "datetime", "os"}
     _MODULE_MAP = {
         "json": "json_",
     }
 
     def _visit_import(self, node: ast.Node):
         name = node.value
-        module_name = self._MODULE_MAP.get(name, name)
-        self._stdlib_imports.add(f"import cobra.stdlib.{module_name} as {name}")
+        if name in self._STDLIB_MODULES:
+            module_name = self._MODULE_MAP.get(name, name)
+            self._stdlib_imports.add(f"import cobra.stdlib.{module_name} as {name}")
+        else:
+            self._uses_packages = True
+            self._stdlib_imports.add(f"import {name}")
 
     def _visit_block(self, node: ast.Node):
         for child in node.children:
