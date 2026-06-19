@@ -222,17 +222,8 @@ class Parser:
 
         if tok.type == "IDENTIFIER":
             name = self.advance().value
-            if self.peek_type() == "LPAREN":
-                self.advance()
-                args = []
-                if self.peek_type() != "RPAREN":
-                    args.append(self.parse_expr())
-                    while self.peek_type() == "COMMA":
-                        self.advance()
-                        args.append(self.parse_expr())
-                self.expect("RPAREN")
-                return ast.call(name, args)
-            return ast.identifier(name)
+            expr = ast.identifier(name)
+            return self._parse_postfix(expr)
 
         if tok.type == "LPAREN":
             self.advance()
@@ -245,3 +236,38 @@ class Parser:
             return ast.unary_op("-", self.parse_primary())
 
         raise ParseError(f"Unexpected token {tok.type}({tok.value!r}) at L{tok.line}:{tok.col}")
+
+    def _parse_postfix(self, expr: ast.Node) -> ast.Node:
+        while True:
+            if self.peek_type() == "DOT":
+                self.advance()
+                member = self.expect("IDENTIFIER").value
+                expr = ast.member_access(expr, member)
+            elif self.peek_type() == "LPAREN":
+                self.advance()
+                args = []
+                if self.peek_type() != "RPAREN":
+                    args.append(self.parse_expr())
+                    while self.peek_type() == "COMMA":
+                        self.advance()
+                        args.append(self.parse_expr())
+                self.expect("RPAREN")
+                if expr.type in (ast.NodeType.MEMBER_ACCESS, ast.NodeType.IDENTIFIER):
+                    full_name = self._build_dotted(expr)
+                    expr = ast.call(full_name, args)
+                else:
+                    raise ParseError("Cannot call non-identifier")
+            else:
+                break
+        return expr
+
+    def _build_dotted(self, node: ast.Node) -> str:
+        parts = []
+        cur = node
+        while cur.type == ast.NodeType.MEMBER_ACCESS:
+            parts.append(cur.value)
+            cur = cur.children[0]
+        if cur.type == ast.NodeType.IDENTIFIER:
+            parts.append(cur.value)
+        parts.reverse()
+        return ".".join(parts)

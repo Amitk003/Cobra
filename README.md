@@ -25,7 +25,9 @@ CobraOS (Linux-based)
 ```bash
 pip install -e .
 cobrac examples/hello.cobra    # Run a Cobra file
-cobrac examples/features.cobra # Run all language features
+cobrac examples/features.cobra   # Run all language features
+cobrac examples/stdlib_demo.cobra # Test standard library
+cobrac examples/json_demo.cobra   # JSON module demo
 ```
 
 ## Components
@@ -35,7 +37,7 @@ cobrac examples/features.cobra # Run all language features
 | Cobra Language | Variables, if/else, loops, functions, booleans | ✅ Done (Phase 2) |
 | Cobra Compiler | Lexer → Parser → AST → Python Codegen | ✅ Done (Phase 2) |
 | Cobra Runtime | built-in functions (print, input, str, int, len, etc.) | ✅ Done (Phase 3) |
-| Standard Library | math, string, json, filesystem, datetime | 📋 Planned |
+| Standard Library | math, string, json, filesystem, datetime, os | ✅ Done (Phase 4) |
 | Package Manager | cobrapkg — install Cobra libraries | 📋 Planned |
 | Cobra Shell | Interactive REPL and script runner | 📋 Planned |
 | CobraOS | Linux-based OS image with Cobra tooling | 📋 Planned |

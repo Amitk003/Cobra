@@ -1,0 +1,7 @@
+import json
+
+let data = json.parse('{"name": "Cobra", "year": 2026}')
+print("parsed: " + json.stringify(data))
+
+print("pretty:")
+print(json.stringify(data))

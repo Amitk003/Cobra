@@ -1,0 +1,40 @@
+# Standard Library Demo
+
+import math
+import string
+import filesystem
+import datetime
+import os
+
+# Math
+print("math.pi = " + str(math.pi))
+print("math.sqrt(16) = " + str(math.sqrt(16)))
+print("math.sin(0) = " + str(math.sin(0)))
+print("math.floor(3.7) = " + str(math.floor(3.7)))
+print("math.ceil(3.2) = " + str(math.ceil(3.2)))
+print("math.pow(2, 10) = " + str(math.pow(2, 10)))
+print("math.abs(-5) = " + str(math.abs(-5)))
+
+# String
+print("string.upper('hello') = " + string.upper("hello"))
+print("string.lower('HELLO') = " + string.lower("HELLO"))
+print("string.contains('hello world', 'world') = " + str(string.contains("hello world", "world")))
+print("string.length('hello') = " + str(string.length("hello")))
+print("string.reverse('cobra') = " + string.reverse("cobra"))
+print("string.repeat('hi ', 3) = " + string.repeat("hi ", 3))
+
+# Filesystem
+print("filesystem.cwd() = " + filesystem.cwd())
+print("filesystem.exists('.') = " + str(filesystem.exists(".")))
+print("filesystem.is_dir('.') = " + str(filesystem.is_dir(".")))
+
+# Datetime
+print("datetime.now() = " + datetime.now())
+print("datetime.year() = " + str(datetime.year()))
+print("datetime.month() = " + str(datetime.month()))
+print("datetime.day() = " + str(datetime.day()))
+
+# OS
+print("os.name() = " + os.name())
+print("os.pid() = " + str(os.pid()))
+print("os.cpu_count() = " + str(os.cpu_count()))

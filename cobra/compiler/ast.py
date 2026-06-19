@@ -24,6 +24,7 @@ class NodeType(Enum):
     BOOL = auto()
     IDENTIFIER = auto()
     GROUP = auto()
+    MEMBER_ACCESS = auto()
 
 
 @dataclass
@@ -119,3 +120,7 @@ def bool_lit(value: bool) -> Node:
 
 def identifier(name: str) -> Node:
     return node(NodeType.IDENTIFIER, value=name)
+
+
+def member_access(obj: Node, member: str) -> Node:
+    return node(NodeType.MEMBER_ACCESS, value=member, children=[obj])

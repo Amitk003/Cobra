@@ -112,14 +112,23 @@ class CodegenPy:
     def _visit_call(self, node: ast.Node):
         name = node.value
         args = ", ".join(self._visit(child) for child in node.children)
-        if name in self._RUNTIME_FUNCS:
+        if name in self._RUNTIME_FUNCS and "." not in name:
             self._uses_runtime = True
             return f"{self._RUNTIME_FUNCS[name]}({args})"
         return f"{name}({args})"
 
+    def _visit_member_access(self, node: ast.Node):
+        obj = self._visit(node.children[0])
+        return f"{obj}.{node.value}"
+
+    _MODULE_MAP = {
+        "json": "json_",
+    }
+
     def _visit_import(self, node: ast.Node):
         name = node.value
-        self._stdlib_imports.add(f"import cobra.stdlib.{name} as {name}")
+        module_name = self._MODULE_MAP.get(name, name)
+        self._stdlib_imports.add(f"import cobra.stdlib.{module_name} as {name}")
 
     def _visit_block(self, node: ast.Node):
         for child in node.children:

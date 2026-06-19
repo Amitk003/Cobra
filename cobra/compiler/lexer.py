@@ -5,6 +5,7 @@ from dataclasses import dataclass
 TOKEN_SPEC = [
     ("NUMBER",    r"\d+(\.\d+)?"),
     ("STRING",    r'"[^"]*"'),
+    ("STRING_SINGLE", r"'[^']*'"),
     ("IDENTIFIER", r"[a-zA-Z_][a-zA-Z0-9_]*"),
     ("RANGE",     r"\.\."),
     ("ARROW",     r"->"),
@@ -100,6 +101,9 @@ class Lexer:
                 continue
             if kind == "MISMATCH":
                 raise LexerError(f"Unexpected character {value!r} at line {line}, col {col}")
+
+            if kind == "STRING_SINGLE":
+                kind = "STRING"
 
             if kind == "IDENTIFIER" and value in KEYWORDS:
                 kind = KEYWORDS[value]

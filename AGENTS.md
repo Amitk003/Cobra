@@ -31,6 +31,10 @@ cobra/
 - All codegen visitors that produce expression values **return** strings
 - Statement visitors **emit** via `self.emit()`
 - Expression statements (like bare calls) rely on `_visit_program` checking return values
+- Member access (`math.sqrt`) uses `MEMBER_ACCESS` AST node with dotted string building
+- Single and double-quoted strings are both supported in the lexer
+- Runtime builtins are imported via `from cobra.runtime.builtins import *` when needed
+- Standard library modules are in `cobra/stdlib/` and imported as `import cobra.stdlib.<name> as <name>`
 
 ## Next Phase Tasks
 
